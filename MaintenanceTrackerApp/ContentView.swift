@@ -1,21 +1,38 @@
 //
 //  ContentView.swift
-//  MaintenanceTrackerApp
+//  HabitU
 //
-//  Created by Mark Martin on 6/26/23.
+//  Created by Mark Martin on 6/7/23.
 //
 
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+    @EnvironmentObject var dataController: DataController
+
+    func delete(_ offsets: IndexSet) {
+        let issues = dataController.issuesForSelectedFilter()
+
+        for offset in offsets {
+            let item = issues[offset]
+            dataController.delete(item)
         }
-        .padding()
+    }
+    
+    var body: some View {
+            List(selection: $dataController.selectedIssue) {
+                ForEach(dataController.issuesForSelectedFilter()) { issue in
+                    IssueRow(issue: issue)
+                }
+                .onDelete(perform: delete)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color(UIColor.systemBackground))
+            }
+            .navigationTitle("Issues")
+            .searchable(text: $dataController.filterText, tokens: $dataController.filterTokens, suggestedTokens: .constant(dataController.suggestedFilterTokens), prompt: "Filter issues, or type # to add tags") { tag in
+                Text(tag.tagName)
+            }
+            .toolbar(content: ContentViewToolbar.init)
     }
 }
 

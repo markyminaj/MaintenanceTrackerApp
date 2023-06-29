@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "CFCD9E47-F0D7-40FE-BD1F-710EC3116B13",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MaintenanceTrackerApp.xcodeproj",
+      "identifier" : "9F43C5722A4ABA660011A48F",
+      "name" : "MaintenanceTrackerApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MaintenanceTrackerApp.xcodeproj",
+        "identifier" : "9FCA06642A4CA36D00E102E5",
+        "name" : "MaintenanceTrackerAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}
