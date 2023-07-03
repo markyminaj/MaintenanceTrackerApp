@@ -1,6 +1,5 @@
 //
 //  DetailView.swift
-//  HabitU
 //
 //  Created by Mark Martin on 6/7/23.
 //

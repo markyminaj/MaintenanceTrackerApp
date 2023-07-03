@@ -1,6 +1,5 @@
 //
 //  IssueRow.swift
-//  HabitU
 //
 //  Created by Mark Martin on 6/11/23.
 //
@@ -10,7 +9,6 @@ import SwiftUI
 struct IssueRow: View {
     @EnvironmentObject var dataController: DataController
     @ObservedObject var issue: Issue
-    
     var body: some View {
         NavigationLink(value: issue) {
                 HStack {

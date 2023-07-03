@@ -1,11 +1,12 @@
 //
 //  DataController.swift
-//  HabitU
 //
 //  Created by Mark Martin on 6/7/23.
 //
 
 import CoreData
+import CoreSpotlight
+import UserNotifications
 
 enum SortType: String {
     case dateCreated = "createdDate"
@@ -18,6 +19,9 @@ enum Status {
 
 class DataController: ObservableObject {
     let container: NSPersistentCloudKitContainer
+    var searchableItems: [CSSearchableItem] = []
+    
+    
 
     @Published var selectedFilter: Filter? = Filter.all
     @Published var selectedIssue: Issue?
@@ -205,6 +209,7 @@ class DataController: ObservableObject {
         saveTask?.cancel()
         if container.viewContext.hasChanges {
             try? container.viewContext.save()
+            print("Issue saved")
         }
     }
     
@@ -243,7 +248,119 @@ class DataController: ObservableObject {
 
         let request2: NSFetchRequest<NSFetchRequestResult> = Issue.fetchRequest()
         delete(request2)
-
         save()
+    }
+    
+    func update(with issue: Issue) {
+        if issue.remindMe {
+            self.addReminders(for: issue) { success in
+                if success == false {
+                    issue.reminderTime = nil
+                    issue.remindMe = false
+                    
+                }
+            }
+        } else {
+            issue.reminderTime = nil
+            self.removeReminders(for: issue)
+        }
+        
+        
+        print("INSIDE UPDATE WITH ISSUE")
+        let issueID = issue.objectID.uriRepresentation().absoluteString
+        let tagID = issue.issueTags.first?.objectID.uriRepresentation().absoluteString
+        let attributeSet = CSSearchableItemAttributeSet(contentType: .text)
+        attributeSet.title = issue.issueTitle
+        attributeSet.contentDescription = issue.issueContent
+        
+        
+        let indexable = CSSearchableIndex.isIndexingAvailable()
+        print("This is indexable or not: \(indexable)")
+        
+        let searchableIssue = CSSearchableItem(
+            uniqueIdentifier: issueID,
+            domainIdentifier: "myissues",
+            attributeSet: attributeSet)
+        
+        searchableItems.append(searchableIssue)
+        
+        
+        CSSearchableIndex.default().indexSearchableItems(searchableItems) { error in
+            if let error = error {
+                print("Failed to index searchable items: \(error.localizedDescription)")
+            } else {
+                print("Searchable issue indexed successfully")
+                print(searchableIssue.attributeSet.title!)
+                print(self.searchableItems)
+                
+            }
+        }
+        save()
+    }
+    
+    func addReminders(for issue: Issue, completion: @escaping (Bool) -> Void) {
+        let center = UNUserNotificationCenter.current()
+
+        center.getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                self.requestNotifications { success in
+                    if success {
+                        self.placeReminders(for: issue, completion: completion)
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(false)
+                        }
+                    }
+                }
+            case .authorized:
+                self.placeReminders(for: issue, completion: completion)
+            default:
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+            }
+        }
+    }
+
+    func removeReminders(for issue: Issue) {
+        let center = UNUserNotificationCenter.current()
+            let id = issue.objectID.uriRepresentation().absoluteString
+            center.removePendingNotificationRequests(withIdentifiers: [id])
+    }
+
+    private func requestNotifications(completion: @escaping (Bool) -> Void) {
+        let center = UNUserNotificationCenter.current()
+
+            center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
+                completion(granted)
+            }
+    }
+
+    private func placeReminders(for issue: Issue, completion: @escaping (Bool) -> Void) {
+        let content = UNMutableNotificationContent()
+        content.sound = .default
+        content.title = issue.issueTitle
+
+        if let issueDetail = issue.content {
+            content.subtitle = issueDetail
+        }
+        
+        let components = Calendar.current.dateComponents([.hour, .minute], from: issue.reminderTime ?? Date())
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        
+        let id = issue.objectID.uriRepresentation().absoluteString
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            DispatchQueue.main.async {
+                if error == nil {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+                
+            }
+        }
     }
 }

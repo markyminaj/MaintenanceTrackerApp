@@ -2,10 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIBackgroundModes</key>
+	<key>UIApplicationShortcutItems</key>
 	<array>
-		<string>fetch</string>
-		<string>remote-notification</string>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>maintenanceTracker://newIssue</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>rectangle.stack.badge.plus</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>New Issue</string>
+		</dict>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.markmartin89.MaintenanceTrackerApp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>maintenanceTracker</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>

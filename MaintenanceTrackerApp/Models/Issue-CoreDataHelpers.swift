@@ -1,6 +1,5 @@
 //
 //  Issue-CoreDataHelpers.swift
-//  HabitU
 //
 //  Created by Mark Martin on 6/7/23.
 //
@@ -12,6 +11,7 @@ extension Issue {
         get { title ?? "" }
         set { title = newValue }
     }
+    
 
     var issueContent: String {
         get { content ?? "" }
@@ -20,6 +20,11 @@ extension Issue {
 
     var issueCreatedDate: Date {
         createdDate ?? .now
+    }
+    
+    var issueReminderTime: Date {
+        get { reminderTime ?? .now }
+        set { reminderTime = newValue }
     }
 
     var issueModificationDate: Date {

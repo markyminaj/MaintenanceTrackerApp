@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MaintenanceTracker: App {
-    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var dataController = DataController()
     
     @Environment(\.scenePhase) var scenePhase

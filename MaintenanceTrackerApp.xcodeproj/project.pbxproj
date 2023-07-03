@@ -27,6 +27,8 @@
 		9F43C5BD2A4ABA900011A48F /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F43C5A12A4ABA900011A48F /* Bundle-Decodable.swift */; };
 		9F43C5C12A4AC22A0011A48F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F43C5C02A4AC1960011A48F /* ContentView.swift */; };
 		9F43C5CA2A4AC6D40011A48F /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F43C5C92A4AC6D40011A48F /* Award.swift */; };
+		9FB9B7852A5250CD00445AFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B7842A5250CD00445AFE /* AppDelegate.swift */; };
+		9FB9B7872A5250E000445AFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B7862A5250E000445AFE /* SceneDelegate.swift */; };
 		9FCA06682A4CA36D00E102E5 /* MaintenanceTrackerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCA06672A4CA36D00E102E5 /* MaintenanceTrackerAppTests.swift */; };
 		9FCA06782A4D367C00E102E5 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCA06772A4D367C00E102E5 /* Color+Ext.swift */; };
 		9FCA067A2A4D430B00E102E5 /* LinearGradient+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCA06792A4D430A00E102E5 /* LinearGradient+Ext.swift */; };
@@ -68,6 +70,9 @@
 		9F43C5A12A4ABA900011A48F /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		9F43C5C02A4AC1960011A48F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9F43C5C92A4AC6D40011A48F /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
+		9FB9B77F2A50C28B00445AFE /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
+		9FB9B7842A5250CD00445AFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9FB9B7862A5250E000445AFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9FCA06652A4CA36D00E102E5 /* MaintenanceTrackerAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaintenanceTrackerAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FCA06672A4CA36D00E102E5 /* MaintenanceTrackerAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceTrackerAppTests.swift; sourceTree = "<group>"; };
 		9FCA066E2A4CA4C600E102E5 /* MaintenanceTrackerApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaintenanceTrackerApp.xctestplan; path = MaintenanceTrackerAppTests/MaintenanceTrackerApp.xctestplan; sourceTree = SOURCE_ROOT; };
@@ -99,6 +104,7 @@
 				9F43C5752A4ABA660011A48F /* MaintenanceTrackerApp */,
 				9FCA06662A4CA36D00E102E5 /* MaintenanceTrackerAppTests */,
 				9F43C5742A4ABA660011A48F /* Products */,
+				9FB9B77E2A50C28A00445AFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +131,8 @@
 				9F43C5A02A4ABA900011A48F /* Info.plist */,
 				9F43C5842A4ABA8E0011A48F /* Main.xcdatamodeld */,
 				9F43C58A2A4ABA8E0011A48F /* Preview Content */,
+				9FB9B7842A5250CD00445AFE /* AppDelegate.swift */,
+				9FB9B7862A5250E000445AFE /* SceneDelegate.swift */,
 			);
 			path = MaintenanceTrackerApp;
 			sourceTree = "<group>";
@@ -183,6 +191,14 @@
 				9FCA06792A4D430A00E102E5 /* LinearGradient+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9FB9B77E2A50C28A00445AFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9FB9B77F2A50C28B00445AFE /* CoreSpotlight.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9FCA06662A4CA36D00E102E5 /* MaintenanceTrackerAppTests */ = {
@@ -314,6 +330,8 @@
 				9F43C5A52A4ABA900011A48F /* SidebarView.swift in Sources */,
 				9F43C5B52A4ABA900011A48F /* ContentViewToolbar.swift in Sources */,
 				9F43C5772A4ABA660011A48F /* MaintenanceTracker.swift in Sources */,
+				9FB9B7852A5250CD00445AFE /* AppDelegate.swift in Sources */,
+				9FB9B7872A5250E000445AFE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +482,7 @@
 				DEVELOPMENT_TEAM = 4BPQ98Z5QY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MaintenanceTrackerApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -494,6 +513,7 @@
 				DEVELOPMENT_TEAM = 4BPQ98Z5QY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MaintenanceTrackerApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
