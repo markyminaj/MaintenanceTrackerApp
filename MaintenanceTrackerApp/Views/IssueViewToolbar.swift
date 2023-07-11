@@ -42,5 +42,6 @@ struct IssueViewToolbar: View {
 struct IssueToolbar_Previews: PreviewProvider {
     static var previews: some View {
         IssueViewToolbar(issue: Issue.example)
+            .environmentObject(DataController.init(inMemory: true))
     }
 }

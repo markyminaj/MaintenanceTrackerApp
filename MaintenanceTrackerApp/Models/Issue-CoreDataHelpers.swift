@@ -52,6 +52,11 @@ extension Issue {
         return result.sorted()
     }
     
+    var issueUpdates: [MaintenanceUpdate] {
+        // to be completed
+        return []
+    }
+    
     var issueStatus: String {
         if completed {
             return "Closed"

@@ -47,5 +47,5 @@ struct TagsMenuView: View {
 struct TagsMenuView_Previews: PreviewProvider {
     static var previews: some View {
         TagsMenuView(issue: .example)
-    }
+        .environmentObject(DataController.init())    }
 }

@@ -10,11 +10,13 @@ struct IssueView: View {
     @EnvironmentObject var dataController: DataController
     @ObservedObject var issue: Issue
     @State private var showingNotificationsError = false
+    @State private var isSheetPresented = false
     @State private var remindMe = false
     @State private var reminderTime: Date = .now
+    @State private var historyText: String = ""
+    @State private var maintenanceUpdates: [MaintenanceUpdate] = []
 
-    
-    
+
     var body: some View {
         Form {
             Section(header: Text("Issue Reminders")) {
@@ -76,6 +78,34 @@ struct IssueView: View {
                         axis: .vertical)
                 }
             }
+            
+            Section(header: Text("History")) {
+                VStack {
+                    ScrollView {
+                        LazyVStack(alignment: .leading) {
+                            ForEach(maintenanceUpdates) { update in
+                                VStack(alignment: .leading) {
+                                    Text("Date: \(update.date.formatted())")
+                                        .font(.headline)
+                                    Text("Description: \(update.description)")
+                                        .font(.body)
+                                }
+                                .padding()
+                            }
+                        }
+                    }
+                }
+                Button("Add Maintenance Update") {
+                    isSheetPresented = true
+                }
+                .sheet(isPresented: $isSheetPresented) {
+                    // Sheet content with input fields and an "Add" button
+                    MaintenanceUpdateView { update in
+                        maintenanceUpdates.append(update)
+                        isSheetPresented = false
+                    }
+                }
+            }
         }
         .onDisappear(perform: save)
         .disabled(issue.isDeleted)
@@ -89,8 +119,6 @@ struct IssueView: View {
     }
     
     func save() {
-        print("INSIDE DATACONTROLLER UPDATE ISSUE")
-        
         dataController.update(with: issue)
     }
     
@@ -110,5 +138,6 @@ struct IssueView: View {
 struct IssueView_Previews: PreviewProvider {
     static var previews: some View {
         IssueView(issue: .example)
+            .environmentObject(DataController.init())
     }
 }

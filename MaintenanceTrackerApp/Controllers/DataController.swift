@@ -21,7 +21,6 @@ class DataController: ObservableObject {
     let container: NSPersistentCloudKitContainer
     var searchableItems: [CSSearchableItem] = []
     
-    
 
     @Published var selectedFilter: Filter? = Filter.all
     @Published var selectedIssue: Issue?
@@ -32,6 +31,7 @@ class DataController: ObservableObject {
     @Published var filterStatus = Status.all
     @Published var sortType = SortType.dateCreated
     @Published var sortNewestFirst = true
+    @Published var historyUpdates = [MaintenanceUpdate]()
 
     var suggestedFilterTokens: [Tag] {
         guard filterText.starts(with: "#") else {
@@ -47,6 +47,12 @@ class DataController: ObservableObject {
 
         return (try? container.viewContext.fetch(request).sorted()) ?? []
     }
+    
+    var sortedHistoryUpdates: [MaintenanceUpdate] {
+        //return historyUpdates.sorted()
+        return historyUpdates
+    }
+    
     
     private var saveTask: Task<Void, Error>?
     
@@ -167,15 +173,16 @@ class DataController: ObservableObject {
     
     func createSampleData() {
         let viewContext = container.viewContext
-        
-        for tagCounter in 1...3 {
+        let stations = ["FOH", "BOH", "Hennys", "Vents", "Toaster", "Merco"]
+
+        for station in stations {
             let tag = Tag(context: viewContext)
             tag.id = UUID()
-            tag.name = "Tag \(tagCounter)"
+            tag.name = station
             
             for issueCounter in 1...3 {
                 let issue = Issue(context: viewContext)
-                issue.title = "Issue \(tagCounter)-\(issueCounter)"
+                issue.title = "\(station) issue-\(issueCounter)"
                 issue.content = "description goes here"
                 issue.createdDate = .now
                 issue.completed = Bool.random()
@@ -265,8 +272,6 @@ class DataController: ObservableObject {
             self.removeReminders(for: issue)
         }
         
-        
-        print("INSIDE UPDATE WITH ISSUE")
         let issueID = issue.objectID.uriRepresentation().absoluteString
         let tagID = issue.issueTags.first?.objectID.uriRepresentation().absoluteString
         let attributeSet = CSSearchableItemAttributeSet(contentType: .text)
@@ -275,11 +280,10 @@ class DataController: ObservableObject {
         
         
         let indexable = CSSearchableIndex.isIndexingAvailable()
-        print("This is indexable or not: \(indexable)")
         
         let searchableIssue = CSSearchableItem(
             uniqueIdentifier: issueID,
-            domainIdentifier: "myissues",
+            domainIdentifier: tagID,
             attributeSet: attributeSet)
         
         searchableItems.append(searchableIssue)
@@ -289,9 +293,6 @@ class DataController: ObservableObject {
             if let error = error {
                 print("Failed to index searchable items: \(error.localizedDescription)")
             } else {
-                print("Searchable issue indexed successfully")
-                print(searchableIssue.attributeSet.title!)
-                print(self.searchableItems)
                 
             }
         }

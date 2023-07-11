@@ -27,6 +27,8 @@
 		9F43C5BD2A4ABA900011A48F /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F43C5A12A4ABA900011A48F /* Bundle-Decodable.swift */; };
 		9F43C5C12A4AC22A0011A48F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F43C5C02A4AC1960011A48F /* ContentView.swift */; };
 		9F43C5CA2A4AC6D40011A48F /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F43C5C92A4AC6D40011A48F /* Award.swift */; };
+		9F4AD4502A5C8B59009ED7B5 /* MaintenanceUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4AD44F2A5C8B59009ED7B5 /* MaintenanceUpdate.swift */; };
+		9F4AD4522A5C8C73009ED7B5 /* MaintenanceUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4AD4512A5C8C73009ED7B5 /* MaintenanceUpdateView.swift */; };
 		9FB9B7852A5250CD00445AFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B7842A5250CD00445AFE /* AppDelegate.swift */; };
 		9FB9B7872A5250E000445AFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B7862A5250E000445AFE /* SceneDelegate.swift */; };
 		9FCA06682A4CA36D00E102E5 /* MaintenanceTrackerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCA06672A4CA36D00E102E5 /* MaintenanceTrackerAppTests.swift */; };
@@ -70,6 +72,8 @@
 		9F43C5A12A4ABA900011A48F /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		9F43C5C02A4AC1960011A48F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9F43C5C92A4AC6D40011A48F /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
+		9F4AD44F2A5C8B59009ED7B5 /* MaintenanceUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceUpdate.swift; sourceTree = "<group>"; };
+		9F4AD4512A5C8C73009ED7B5 /* MaintenanceUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintenanceUpdateView.swift; sourceTree = "<group>"; };
 		9FB9B77F2A50C28B00445AFE /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		9FB9B7842A5250CD00445AFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FB9B7862A5250E000445AFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				9F43C59D2A4ABA900011A48F /* DetailView.swift */,
 				9F43C58C2A4ABA8E0011A48F /* IssueRow.swift */,
 				9F43C59F2A4ABA900011A48F /* IssueView.swift */,
+				9F4AD4512A5C8C73009ED7B5 /* MaintenanceUpdateView.swift */,
 				9F43C59A2A4ABA8F0011A48F /* IssueViewToolbar.swift */,
 				9F43C5952A4ABA8F0011A48F /* NoIssueView.swift */,
 				9F43C5872A4ABA8E0011A48F /* SidebarView.swift */,
@@ -168,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				9F43C59E2A4ABA900011A48F /* Filter.swift */,
+				9F4AD44F2A5C8B59009ED7B5 /* MaintenanceUpdate.swift */,
 				9F43C5C92A4AC6D40011A48F /* Award.swift */,
 				9F43C58F2A4ABA8F0011A48F /* Issue-CoreDataHelpers.swift */,
 				9F43C5882A4ABA8E0011A48F /* Tag-CoreDataHelpers.swift */,
@@ -315,8 +321,10 @@
 				9F43C5B62A4ABA900011A48F /* IssueViewToolbar.swift in Sources */,
 				9F43C5A92A4ABA900011A48F /* IssueRow.swift in Sources */,
 				9F43C5AC2A4ABA900011A48F /* Issue-CoreDataHelpers.swift in Sources */,
+				9F4AD4522A5C8C73009ED7B5 /* MaintenanceUpdateView.swift in Sources */,
 				9F43C5BA2A4ABA900011A48F /* Filter.swift in Sources */,
 				9FCA06782A4D367C00E102E5 /* Color+Ext.swift in Sources */,
+				9F4AD4502A5C8B59009ED7B5 /* MaintenanceUpdate.swift in Sources */,
 				9F43C5BB2A4ABA900011A48F /* IssueView.swift in Sources */,
 				9F43C5B82A4ABA900011A48F /* UserFilterRow.swift in Sources */,
 				9F43C5BD2A4ABA900011A48F /* Bundle-Decodable.swift in Sources */,
