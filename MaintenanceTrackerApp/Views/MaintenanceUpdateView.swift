@@ -8,10 +8,22 @@
 import SwiftUI
 
 struct MaintenanceUpdateView: View {
+    @EnvironmentObject var dataController: DataController
+    @ObservedObject var issue: Issue
     @State private var date = Date()
     @State private var description = ""
-
+    @State private var sheetPresented = true
+    
     let onAdd: (MaintenanceUpdate) -> Void
+    
+    func newUpdate() {
+        let update = MaintenanceUpdate(context: dataController.container.viewContext)
+        update.updateDate = .now
+        update.updateDescription = description
+        issue.issueUpdates.append(update)
+        print(update)
+        //dataController.save()
+    }
 
     var body: some View {
         NavigationView {
@@ -21,8 +33,8 @@ struct MaintenanceUpdateView: View {
             }
             .navigationBarTitle("Add Maintenance Update")
             .navigationBarItems(trailing: Button("Add") {
-                let update = MaintenanceUpdate(date: date, description: description)
-                onAdd(update)
+                newUpdate()
+                
                 
             })
         }

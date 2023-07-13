@@ -11,6 +11,12 @@
         <attribute name="remindMe" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="issues" inverseEntity="Tag"/>
+        <relationship name="updates" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MaintenanceUpdate" inverseName="issues" inverseEntity="MaintenanceUpdate"/>
+    </entity>
+    <entity name="MaintenanceUpdate" representedClassName="MaintenanceUpdate" syncable="YES" codeGenerationType="class">
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updateDescription" optional="YES" attributeType="String"/>
+        <relationship name="issues" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Issue" inverseName="updates" inverseEntity="Issue"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

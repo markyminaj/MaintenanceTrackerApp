@@ -14,7 +14,6 @@ struct IssueView: View {
     @State private var remindMe = false
     @State private var reminderTime: Date = .now
     @State private var historyText: String = ""
-    @State private var maintenanceUpdates: [MaintenanceUpdate] = []
 
 
     var body: some View {
@@ -78,33 +77,23 @@ struct IssueView: View {
                         axis: .vertical)
                 }
             }
-            
+            //MARK: Need to add list of updates here via core data
             Section(header: Text("History")) {
                 VStack {
-                    ScrollView {
-                        LazyVStack(alignment: .leading) {
-                            ForEach(maintenanceUpdates) { update in
-                                VStack(alignment: .leading) {
-                                    Text("Date: \(update.date.formatted())")
-                                        .font(.headline)
-                                    Text("Description: \(update.description)")
-                                        .font(.body)
-                                }
-                                .padding()
-                            }
+                    Text("Updates go here")
+                    //Problem is here..how to add list of MaintenanceUpdates assigned to issue
+                    ForEach(issue.issueUpdates) { update in
+                        VStack {
+                            Text("Update: \(update.updateContent)")
                         }
+                        
                     }
+                    
                 }
                 Button("Add Maintenance Update") {
                     isSheetPresented = true
                 }
-                .sheet(isPresented: $isSheetPresented) {
-                    // Sheet content with input fields and an "Add" button
-                    MaintenanceUpdateView { update in
-                        maintenanceUpdates.append(update)
-                        isSheetPresented = false
-                    }
-                }
+                
             }
         }
         .onDisappear(perform: save)
@@ -115,6 +104,13 @@ struct IssueView: View {
         .onSubmit(dataController.save)
         .toolbar {
             IssueViewToolbar(issue: issue)
+        }
+        .sheet(isPresented: $isSheetPresented) {
+            // Sheet content with input fields and an "Add" button
+            MaintenanceUpdateView(issue: issue) { update in
+                
+            }
+            
         }
     }
     
@@ -131,8 +127,6 @@ struct IssueView: View {
             UIApplication.shared.open(settingsUrl)
         }
     }
-    
-    
 }
 
 struct IssueView_Previews: PreviewProvider {

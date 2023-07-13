@@ -279,7 +279,7 @@ class DataController: ObservableObject {
         attributeSet.contentDescription = issue.issueContent
         
         
-        let indexable = CSSearchableIndex.isIndexingAvailable()
+        _ = CSSearchableIndex.isIndexingAvailable()
         
         let searchableIssue = CSSearchableItem(
             uniqueIdentifier: issueID,

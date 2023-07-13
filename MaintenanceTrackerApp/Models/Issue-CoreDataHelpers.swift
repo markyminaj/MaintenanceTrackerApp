@@ -53,8 +53,13 @@ extension Issue {
     }
     
     var issueUpdates: [MaintenanceUpdate] {
-        // to be completed
-        return []
+        get {
+            let history = updates?.allObjects as? [MaintenanceUpdate] ?? []
+            return history.sorted()
+        }
+        set {
+            
+        }
     }
     
     var issueStatus: String {
@@ -72,6 +77,14 @@ extension Issue {
             return "No tags"
         } else {
             return issueTags.map(\.tagName).formatted()
+        }
+    }
+    
+    var issueHistoryList: String {
+        if updates?.count == 0 {
+            return "No Updates"
+        } else {
+            return issueUpdates.map(\.updateContent).formatted()
         }
     }
 }
