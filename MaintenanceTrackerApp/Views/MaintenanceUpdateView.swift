@@ -20,9 +20,9 @@ struct MaintenanceUpdateView: View {
         let update = MaintenanceUpdate(context: dataController.container.viewContext)
         update.updateDate = .now
         update.updateDescription = description
-        issue.issueUpdates.append(update)
-        print(update)
-        //dataController.save()
+        issue.addToUpdates(update)
+        print(issue.issueUpdates.count)
+        dataController.save()
     }
 
     var body: some View {

@@ -14,8 +14,8 @@ struct IssueView: View {
     @State private var remindMe = false
     @State private var reminderTime: Date = .now
     @State private var historyText: String = ""
-
-
+    
+    
     var body: some View {
         Form {
             Section(header: Text("Issue Reminders")) {
@@ -30,8 +30,8 @@ struct IssueView: View {
                     }
                 
                 if issue.remindMe {
-                        DatePicker("Reminder time", selection: $issue.issueReminderTime, displayedComponents: .hourAndMinute)
-                            .datePickerStyle(.graphical)
+                    DatePicker("Reminder time", selection: $issue.issueReminderTime, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.graphical)
                 }
                 
             }
@@ -79,21 +79,20 @@ struct IssueView: View {
             }
             //MARK: Need to add list of updates here via core data
             Section(header: Text("History")) {
-                VStack {
-                    Text("Updates go here")
-                    //Problem is here..how to add list of MaintenanceUpdates assigned to issue
-                    ForEach(issue.issueUpdates) { update in
-                        VStack {
-                            Text("Update: \(update.updateContent)")
+                VStack(alignment: .leading) {
+                        List {
+                            ForEach(issue.issueUpdates.sorted(by: { $0.updateCreationDate.compare($1.updateCreationDate) == .orderedDescending })) { update in
+                                VStack(alignment: .leading) {
+                                    Text("Date: \(update.updateCreationDate.formatted())")
+                                    Text("Description: \(update.updateContent)")
+                                }
+                                .padding()
+                            }
                         }
-                        
-                    }
-                    
                 }
                 Button("Add Maintenance Update") {
                     isSheetPresented = true
                 }
-                
             }
         }
         .onDisappear(perform: save)
@@ -122,7 +121,7 @@ struct IssueView: View {
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
-
+        
         if UIApplication.shared.canOpenURL(settingsUrl) {
             UIApplication.shared.open(settingsUrl)
         }
